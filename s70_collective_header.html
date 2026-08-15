@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  S70 COLLECTIVE — Landing page
+  ----------------------------------------------------------------------------
+  lang="es" le avisa al navegador y a los lectores de pantalla que el contenido
+  está en español (mejora accesibilidad y SEO).
+  ============================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  <!--
+    VIEWPORT: es la etiqueta más importante para que la página se vea bien en
+    celulares. Sin ella el móvil "simula" una pantalla de 980px y todo se ve
+    diminuto. (Faltaba en la versión anterior.)
+  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!--
+    SEO: la descripción es lo que Google muestra debajo del título en los
+    resultados de búsqueda. El theme-color pinta la barra del navegador móvil.
+  -->
+  <meta name="description" content="S70 Collective — colectivo de música electrónica. DJs, eventos, audio y fotos. Respect the dancefloor.">
+  <meta name="theme-color" content="#000000">
+
+  <title>S70 Collective — Respect the dancefloor</title>
+
+  <!--
+    HOJAS DE ESTILO
+    ------------------------------------------------------------------------
+    El CSS está partido en archivos por responsabilidad (ver css/README.md).
+    EL ORDEN IMPORTA: en CSS, lo que se carga último gana. Por eso va primero
+    lo general (variables, reset) y después lo específico (componentes).
+
+    ¿Por qué varios <link> y no un solo archivo con @import?
+    Porque @import obliga al navegador a descargar en cadena (baja uno, lo lee,
+    recién ahí descubre el siguiente). Con <link> los ve todos de una y los
+    baja en paralelo: es más rápido.
+  -->
+
+  <!-- 1. BASE: valores y cimientos que usa todo lo demás -->
+  <link rel="stylesheet" href="css/base/variables.css">
+  <link rel="stylesheet" href="css/base/reset.css">
+  <link rel="stylesheet" href="css/base/accesibilidad.css">
+  <link rel="stylesheet" href="css/base/animaciones.css">
+
+  <!-- 2. LAYOUT: las grandes zonas de la página -->
+  <link rel="stylesheet" href="css/layout/video-fondo.css">
+  <link rel="stylesheet" href="css/layout/cabecera.css">
+  <link rel="stylesheet" href="css/layout/hero.css">
+  <link rel="stylesheet" href="css/layout/secciones.css">
+  <link rel="stylesheet" href="css/layout/pie.css">
+
+  <!-- 3. COMPONENTES: piezas reutilizables, van al final para poder ajustar -->
+  <link rel="stylesheet" href="css/componentes/boton.css">
+  <link rel="stylesheet" href="css/componentes/flecha-scroll.css">
+  <link rel="stylesheet" href="css/componentes/tarjetas.css">
+  <link rel="stylesheet" href="css/componentes/djs.css">
+  <link rel="stylesheet" href="css/componentes/redes.css">
+  <link rel="stylesheet" href="css/componentes/contacto.css">
+</head>
+
+<body>
+
+  <!-- Link de accesibilidad: solo aparece al navegar con Tab -->
+  <a class="saltar-al-contenido" href="#contenido-principal">Saltar al contenido</a>
+
+  <!-- ==========================================================================
+       VIDEO DE FONDO GLOBAL
+       Está fuera de todas las secciones y con position:fixed, así se mantiene
+       visible en toda la landing mientras se scrollea.
+       · autoplay + muted + playsinline: la combinación exacta que exigen
+         Chrome y iOS para permitir la reproducción automática.
+       · aria-hidden: es decorativo, los lectores de pantalla lo ignoran.
+       ========================================================================== -->
+  <div class="video-fondo" aria-hidden="true">
+    <video src="s70_bg.mp4" autoplay muted loop playsinline preload="auto"></video>
+  </div>
+
+  <!-- ==========================================================================
+       HEADER — <header> es semántico: identifica el encabezado del sitio
+       ========================================================================== -->
+  <header class="cabecera">
+    <div class="cabecera__izquierda">
+
+      <!-- El logo lleva alt descriptivo: es lo que "lee" Google y un lector
+           de pantalla si la imagen no carga. -->
+      <div class="logo">
+        <img src="data:image/png;base64,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CQSCtEEIlkAgSBuEYAkEgrRBCJZAIEgbhGAJBIK0QQiWQCBIG4RgCQSCtEEIlkAgSBuEYAkEgrRBCJZAIEgbhGAJBIK0QQiWQCBIG4RgCQSCtEEIlkAgSBuEYAkEgrRBCJZAIEgbhGAJBIK0QQiWQCBIG4RgCQSCtEEIlkAgSBuEYAkEgrRBCJZAIEgbhGAJBIK0QQiWQCBIG4RgCQSCtEEIlkAgSBuEYAkEgrRBCJZAIEgbhGAJBIK0QQiWQCBIG4RgCQSCtEEIlkAgSBuEYAkEgrRBCJZAIEgbhGAJBIK0QQiWQCBIG4RgCQSCtEEIlkAgSBuEYAkEgrRBCJZAIEgbhGAJBIK0QQiWQCBIG4RgCQSCtEEIlkAgSBuEYAkEgrRBCJZAIEgbhGAJBIK0QQiWQCBIG4RgCQSCtEEIlkAgSBuEYAkEgrRBCJZAIEgbhGAJBIK0QQiWQCBIG4RgCQSCtEEIlkAgSBuEYAkEgrRBCJZAIEgbhGAJBIK0QQiWQCBIG4RgCQSCtEEIlkAgSBuEYAkEgrRBCJZAIEgbhGAJBIK0QQiWQCBIG4RgCQSCtEEIlkAgSBuEYAkEgrRBCJZAIEgbhGAJBIK0QQiWQCBIG4RgCQSCtEEIlkAgSBuEYAkEgrRBCJZAIEgbhGAJBIK0QQiWQCBIG4RgCQSCtEEIlkAgSBuEYAkEgrRBCJZAIEgb/j80f97uhTJAjAAAAABJRU5ErkJggg==" alt="S70 Collective logo">
+      </div>
+
+      <!-- <nav> marca la navegación principal. El aria-label la distingue de
+           cualquier otra nav que se agregue después (ej: la del footer). -->
+      <nav class="menu" aria-label="Navegación principal">
+        <a href="#">DJs</a>
+        <a href="#">MUSICA</a>
+        <a href="#">AUDIO</a>
+        <a href="#">FOTOS</a>
+        <a href="#eventos">EVENTOS</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       MAIN — el contenido principal y único de la página
+       ========================================================================== -->
+  <main id="contenido-principal">
+
+    <!-- ----------------------------------------------------------------------
+         HERO — primera pantalla, sobre el video
+         Las clases .animado + .retraso-N producen la entrada en cascada.
+         ---------------------------------------------------------------------- -->
+    <section class="hero" aria-labelledby="titulo-principal">
+
+      <h1 id="titulo-principal" class="hero__titulo animado retraso-1">S70 Collective</h1>
+
+      <p class="hero__bajada animado retraso-2">Respect the dancefloor</p>
+
+      <!-- El emoji va con aria-hidden porque un lector de pantalla diría
+           "pin redondo" y no aporta nada; el texto del botón ya es claro. -->
+      <a href="#eventos" class="boton animado retraso-3" aria-label="Ver los próximos eventos de S70 Collective">
+        <span aria-hidden="true">📍</span> Próximos eventos
+      </a>
+
+      <!-- Flecha de scroll: link real hacia la sección de abajo -->
+      <a href="#sobre-nosotros" class="flecha-scroll animado retraso-4" aria-label="Bajar a la sección Sobre nosotros">
+        <span>Scroll</span>
+        <!-- SVG inline: dos líneas que forman un chevron hacia abajo -->
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none"
+             stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 9l6 6 6-6"/>
+        </svg>
+      </a>
+
+    </section>
+
+    <!-- ----------------------------------------------------------------------
+         CONTENIDO SOBRE FONDO OSCURO
+         El wrapper .contenido aplica el panel negro por encima del video.
+         ---------------------------------------------------------------------- -->
+    <div class="contenido">
+
+      <!-- SECCIÓN 1: quiénes somos ------------------------------------------ -->
+      <section id="sobre-nosotros" class="seccion" aria-labelledby="titulo-sobre">
+        <h2 id="titulo-sobre" class="seccion__titulo">Sobre nosotros</h2>
+
+        <p class="seccion__texto">
+          S70 Collective es un colectivo de música electrónica: DJs, productores 
+          que aman la musica.
+          Sin poses, sin apuro: sonido, luces y gente que sabe por qué está ahí.
+        </p>
+
+        <!-- Grilla de tarjetas: se reacomoda sola según el ancho -->
+        <div class="tarjetas">
+          <article class="tarjeta">
+            <h3>DJs &amp; Line-up</h3>
+            <p>Residentes e invitados a fiestas unicas.</p>
+          </article>
+
+      
+          <!-- id="eventos": es el destino del botón "Próximos eventos" del hero
+               y del link EVENTOS del menú. Un link que apunta a un ancla que no
+               existe es un link roto, así que siempre que se agrega un href="#algo"
+               tiene que existir el id correspondiente. -->
+          <article class="tarjeta" id="eventos">
+            <h3>Eventos</h3>
+            <p>Fechas propias y colaboraciones con clubes y espacios independientes de la escena.</p>
+          </article>
+        </div>
+
+        <!-- ------------------------------------------------------------------
+             EL COLECTIVO — grilla de DJs
+             ------------------------------------------------------------------
+             Estructura de cada ficha:
+               <article class="dj">          la tarjeta
+                 <picture>                   la foto (webp + jpg de respaldo)
+                 <div class="dj__info">      nombre, rol y reseña
+
+             Jerarquía de títulos: la sección tiene un <h2>, este bloque un <h3>
+             y cada DJ un <h4>. Nunca hay que saltearse niveles (de h2 a h4):
+             los lectores de pantalla usan esa jerarquía como índice de la
+             página, igual que Google.
+
+             Los seis figuran como Co-founder: no es un dato decorativo, es lo
+             que son. Por eso el rol es el mismo en todas las fichas.
+
+             ⚠️ Las reseñas siguen siendo un borrador: reemplazá el texto de
+             cada <p class="dj__bio"> por la descripción real de cada uno.
+
+             Para agregar un DJ nuevo: copiá un bloque <article class="dj">
+             completo, cambiá foto, nombre y reseña. El CSS no se toca.
+             Ojo con el alt de la foto: tiene que llevar el nombre correcto,
+             es lo que se lee si la imagen no carga.
+             ------------------------------------------------------------------ -->
+        <h3 class="seccion__titulo djs__titulo" id="titulo-colectivo">Co-Founder</h3>
+
+        <div class="djs">
+           <!-- DJ 0 -->
+          <article class="dj">
+            <!-- La foto ahora es un link a Instagram. Queda genérico
+                 (instagram.com/ sin usuario) hasta que tengan la cuenta
+                 puntual de cada DJ; ahí simplemente se reemplaza el href. -->
+            <a class="dj__foto-link" href="https://www.instagram.com/cl.nobody/" target="_blank" rel="noopener noreferrer"
+               aria-label="Ver el Instagram de Nobody (abre en una pestaña nueva)">
+              <picture>
+                <source srcset="img/djs/dj-06.webp" type="image/webp">
+                <img class="dj__foto" src="img/djs/dj-06.jpg" width="672" height="800"
+                     loading="lazy" decoding="async"
+                     alt="Nobody">
+              </picture>
+              <span class="dj__foto-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/>
+                  <circle cx="12" cy="12" r="4.2"/>
+                  <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/>
+                </svg>
+              </span>
+            </a>
+            <div class="dj__info">
+              <h4 class="dj__nombre">Nobody</h4>
+              <span class="dj__rol">Co-founder</span>
+              <p class="dj__bio">Juli Oriundo de la V Región y una de las mentes fundadoras detrás de S70. Destaca por una energía y groove imponente, con sonidos sólidos y psicodelicos te envuelve en un viaje que describe su historia en cada track..</p>
+            </div>
+          </article>
+          <!-- DJ 01 -->
+          <article class="dj">
+            <!-- <picture> sirve el formato más liviano que soporte el navegador:
+                 primero prueba webp (pesa la mitad), y si no puede usa el jpg.
+                 · loading="lazy"   -> no descarga la foto hasta que estés por verla
+                 · decoding="async" -> no bloquea el dibujado de la página
+                 · width y height   -> el navegador reserva el espacio antes de que
+                                       cargue la imagen, y así el texto no "salta" -->
+            <a class="dj__foto-link" href="https://www.instagram.com/alanmcnishdj/ " target="_blank" rel="noopener noreferrer"
+               aria-label="Ver el Instagram de Alan Mcnish (abre en una pestaña nueva)">
+              <picture>
+                <source srcset="img/djs/dj-01.webp" type="image/webp">
+                <img class="dj__foto" src="img/djs/dj-01.jpg" width="800" height="776"
+                     loading="lazy" decoding="async"
+                     alt="Alan Mcnish mezclando en vivo en una fecha de S70 Collective">
+              </picture>
+              <span class="dj__foto-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/>
+                  <circle cx="12" cy="12" r="4.2"/>
+                  <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/>
+                </svg>
+              </span>
+            </a>
+            <div class="dj__info">
+              <h4 class="dj__nombre">Alan Mcnish</h4>
+              <span class="dj__rol">Co-founder</span>
+              <p class="dj__bio">Desde Santa Fe, Argentina 🇦🇷, Alan González lleva más de 4 años desarrollando un sonido propio dentro de la escena House.
+              Fundador de S70 y productor en crecimiento, sus sets destacan por grooves envolventes, ritmos hipnóticos y una energía elegante que conecta de principio a fin con la pista.
+              Inspirado por el movimiento underground y la cultura club, busca transmitir identidad y emoción en cada presentación, convirtiendo cada track en parte de una experiencia auténtica.</p>
+            </div>
+          </article>
+
+          <!-- DJ 02 -->
+          <article class="dj">
+            <a class="dj__foto-link" href="https://www.instagram.com/basst.dj/" target="_blank" rel="noopener noreferrer"
+               aria-label="Ver el Instagram de Bass :T (abre en una pestaña nueva)">
+              <picture>
+                <source srcset="img/djs/dj-02.webp" type="image/webp">
+                <img class="dj__foto" src="img/djs/dj-02.jpg" width="651" height="800"
+                     loading="lazy" decoding="async"
+                     alt="Bass :T">
+              </picture>
+              <span class="dj__foto-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/>
+                  <circle cx="12" cy="12" r="4.2"/>
+                  <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/>
+                </svg>
+              </span>
+            </a>
+            <div class="dj__info">
+              <h4 class="dj__nombre">Bass :T </h4>
+              <span class="dj__rol">Co-founder</span>
+              <p class="dj__bio">Bastian Coronado A.K.A. Bass:tOriginario de Santiago, Bass:t ha desarrollado un sonido enfocado en la energía, la profundidad y la conducción hipnótica del techno moderno.</p>
+            </div>
+          </article>
+
+          <!-- DJ 03 -->
+          <article class="dj">
+            <a class="dj__foto-link" href="https://www.instagram.com/fireshockdj/" target="_blank" rel="noopener noreferrer"
+               aria-label="Ver el Instagram de Fireshock (abre en una pestaña nueva)">
+              <picture>
+                <source srcset="img/djs/dj-03.webp" type="image/webp">
+                <img class="dj__foto" src="img/djs/dj-03.jpg" width="800" height="656"
+                     loading="lazy" decoding="async"
+                     alt="Fireshock">
+              </picture>
+              <span class="dj__foto-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/>
+                  <circle cx="12" cy="12" r="4.2"/>
+                  <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/>
+                </svg>
+              </span>
+            </a>
+            <div class="dj__info">
+              <h4 class="dj__nombre">Fireshock</h4>
+              <span class="dj__rol">Co-founder</span>
+              <p class="dj__bio">Fireshock — Dj/Productor de Hardstyle y miembro de @s70collective Tras un tiempo alejado de la escena, hoy esta de vuelta con mas energía que nunca, con nuevas producciones, nuevos estilos y nueva música. Se vienen nuevos tracks</p>
+            </div>
+          </article>
+
+          <!-- DJ 04 -->
+          <article class="dj">
+            <a class="dj__foto-link" href="https://www.instagram.com/phillmusic.cl/" target="_blank" rel="noopener noreferrer"
+               aria-label="Ver el Instagram de Phill (abre en una pestaña nueva)">
+              <picture>
+                <source srcset="img/djs/dj-04.webp" type="image/webp">
+                <img class="dj__foto" src="img/djs/dj-04.jpg" width="600" height="800"
+                     loading="lazy" decoding="async"
+                     alt="Phill">
+              </picture>
+              <span class="dj__foto-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/>
+                  <circle cx="12" cy="12" r="4.2"/>
+                  <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/>
+                </svg>
+              </span>
+            </a>
+            <div class="dj__info">
+              <h4 class="dj__nombre">Phill</h4>
+              <span class="dj__rol">Co-founder</span>
+              <p class="dj__bio">Luis Felipe aka Phillmusic. Amante de la electrónica en todas sus formas, explorando desde el groove hipnótico del progressive y el trance hasta la energía intensa del peaktime y el hardtechno como NØIRPHILL. Cofundador de S70 y mitad de TwinZodiac, dúo chileno en ascenso enfocado en crear experiencias con identidad propia. Cada set es una búsqueda por ir más allá de la pista, conectando con la gente a través de mezclas innovadoras, atmósferas envolventes y momentos que permanezcan en la memoria</p>
+            </div>
+          </article>
+
+          <!-- DJ 05 -->
+          <article class="dj">
+            <a class="dj__foto-link" href="https://www.instagram.com/ravia.cl/" target="_blank" rel="noopener noreferrer"
+               aria-label="Ver el Instagram de Ravia (abre en una pestaña nueva)">
+              <picture>
+                <source srcset="img/djs/dj-05.webp" type="image/webp">
+                <img class="dj__foto" src="img/djs/dj-05.jpg" width="800" height="786"
+                     loading="lazy" decoding="async"
+                     alt="Ravia">
+              </picture>
+              <span class="dj__foto-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/>
+                  <circle cx="12" cy="12" r="4.2"/>
+                  <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/>
+                </svg>
+              </span>
+            </a>
+            <div class="dj__info">
+              <h4 class="dj__nombre">Ravia</h4>
+              <span class="dj__rol">Co-founder</span>
+              <p class="dj__bio">RAVIA es el proyecto musical de Francisco Jofré, DJ nacido en la Araucanía chilena y cofundador del colectivo S70. Su propuesta recorre el house y el techno, incorporando influencias y sonidos con raíces latinas para construir una identidad cercana, energética y orientada a la pista. Cada set busca generar una experiencia dinámica y envolvente, combinando groove, ritmo y conexión con el público..</p>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- SECCIÓN 2: redes sociales ------------------------------------------ -->
+      <section id="seguinos" class="seccion" aria-labelledby="titulo-seguinos">
+        <h2 id="titulo-seguinos" class="seccion__titulo">Siguenos</h2>
+
+        <p class="seccion__texto">
+          Ahí publicamos las fechas, los sets y las fotos de cada fiesta.
+        </p>
+
+        <!-- <nav> porque es un grupo de enlaces de navegación externa.
+             target="_blank" abre en pestaña nueva, y rel="noopener noreferrer"
+             es OBLIGATORIO junto con él: sin eso, la página destino puede
+             manipular la nuestra (vulnerabilidad conocida como tabnabbing). -->
+        <nav class="redes" aria-label="Redes sociales de S70 Collective">
+
+          <!-- INSTAGRAM -->
+          <div class="red-item">
+            <a class="red" href="https://www.instagram.com/s70collective/" target="_blank" rel="noopener noreferrer"
+               aria-label="Seguinos en Instagram (abre en una pestaña nueva)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/>
+                <circle cx="12" cy="12" r="4.2"/>
+                <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/>
+              </svg>
+            </a>
+            <span>Instagram</span>
+          </div>
+
+          <!-- SOUNDCLOUD -->
+          <div class="red-item">
+            <a class="red" href="https://soundcloud.com/" target="_blank" rel="noopener noreferrer"
+               aria-label="Escuchanos en SoundCloud (abre en una pestaña nueva)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                   stroke-linecap="round" aria-hidden="true">
+                <!-- Las barritas del ecualizador -->
+                <path d="M2 14v3"/>
+                <path d="M5 11.5v5.5"/>
+                <path d="M8 9.5v7.5"/>
+                <!-- La "nube" -->
+                <path d="M11 17V8.5a4.2 4.2 0 0 1 7.2 2.2h.6a3.15 3.15 0 0 1 0 6.3H11z"/>
+              </svg>
+            </a>
+            <span>SoundCloud</span>
+          </div>
+
+          <!-- YOUTUBE -->
+          <div class="red-item">
+            <a class="red" href="https://youtube.com/" target="_blank" rel="noopener noreferrer"
+               aria-label="Miranos en YouTube (abre en una pestaña nueva)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="1.8" y="5.2" width="20.4" height="13.6" rx="4.2"/>
+                <path d="M10.2 9.3l5 2.7-5 2.7z" fill="currentColor" stroke="none"/>
+              </svg>
+            </a>
+            <span>YouTube</span>
+          </div>
+
+          <!-- SPOTIFY -->
+          <div class="red-item">
+            <a class="red" href="https://spotify.com/" target="_blank" rel="noopener noreferrer"
+               aria-label="Escuchanos en Spotify (abre en una pestaña nueva)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                   stroke-linecap="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="9.6"/>
+                <!-- Las tres ondas características -->
+                <path d="M7 8.2c3.6-1.1 8-0.5 11 1.4"/>
+                <path d="M7.4 11.7c3-0.9 6.6-0.4 9.1 1.2"/>
+                <path d="M7.9 15.1c2.4-0.7 5.3-0.3 7.3 1"/>
+              </svg>
+            </a>
+            <span>Spotify</span>
+          </div>
+
+        </nav>
+      </section>
+
+      <!-- SECCIÓN 3: contacto ------------------------------------------------ -->
+      <section id="contacto" class="seccion" aria-labelledby="titulo-contacto">
+        <h2 id="titulo-contacto" class="seccion__titulo">Contacto</h2>
+
+        <p class="seccion__texto">
+          ¿Bookings, prensa o querieres tocar con nosotros? Dale escribenos.
+        </p>
+
+        <!-- mailto: abre el cliente de correo del usuario ya con el destinatario
+             y el asunto cargados. -->
+        <a class="mail"
+           href="mailto:contacto@s70collective.com?subject=Contacto%20desde%20la%20web"
+           aria-label="Enviar un email a contacto arroba s70collective punto com">
+          s70collective@gmail.com
+        </a>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       FOOTER — <footer> es semántico: cierra el documento
+       ========================================================================== -->
+  <footer class="pie">
+    <p>
+      <!-- &copy; es el símbolo ©. El año se deja escrito a mano: es un dato
+           que se actualiza una vez por año y así la página no necesita
+           JavaScript para algo tan chico. -->
+      &copy; 2026 <strong>S70 Collective</strong> — Todos los derechos reservados. Design by <strong>NOBODY</strong>
+      <span class="solo-lectores">Sitio oficial del colectivo S70.  Design By</span>
+    </p>
+  </footer>
+
+</body>
+</html>
